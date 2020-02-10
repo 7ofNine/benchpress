@@ -30,13 +30,6 @@ THE SOFTWARE.
 #pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
 #endif
 
-#ifdef _MSC_VER
-#define BENCH_NOEXCEPT _NOEXCEPT
-#define BENCH_CONSTEXPR
-#else
-#define BENCH_NOEXCEPT noexcept
-#define BENCH_CONSTEXPR constexpr
-#endif
 
 #include <exception>
 #include <iostream>
@@ -276,7 +269,7 @@ namespace cxxopts
     }
 
     virtual const char*
-    what() const BENCH_NOEXCEPT
+    what() const noexcept
     {
       return m_message.c_str();
     }
@@ -800,8 +793,8 @@ namespace cxxopts
   namespace
   {
 
-    BENCH_CONSTEXPR int OPTION_LONGEST = 30;
-    BENCH_CONSTEXPR int OPTION_DESC_GAP = 2;
+    constexpr int OPTION_LONGEST = 30;
+    constexpr int OPTION_DESC_GAP = 2;
 
     std::basic_regex<char> option_matcher
       ("--([[:alnum:]][-_[:alnum:]]+)(=(.*))?|-([a-zA-Z]+)");
